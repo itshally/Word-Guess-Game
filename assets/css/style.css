@@ -1,3 +1,44 @@
+html, body{
+    padding: 2%;
+    margin: 0%;
+    background-image: url(../images/background.jpg);
+    background-position: center;
+    background-size: auto;
+    height: 100%;
+    width: 100%;
+}
 h1{
-    font-size: 3em;
+    color: #FFFFFF;
+    text-shadow: 0px 0px 10px #000000;
+    font-size: 4em;
+    text-align: center;
+    margin-bottom: 2%;
+}
+#image-container{
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+img{
+    box-shadow: 0px 0px 50px #FFFFFF;
+    border: 5px solid #000000;
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+h2{
+    font-size: 4em;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 2%;
+    text-shadow: 0px 0px 10px #0000FF;
+}
+
+#status-container{
+    background-color: #111111;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2em;
+    padding: 2%;
+    width: 50%;
 }
