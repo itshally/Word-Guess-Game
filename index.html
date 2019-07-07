@@ -15,13 +15,26 @@
     </head>
     <body>
         <h1>Word Guess Game</h1>
+
+        <!-- container for images as clue -->
         <div class="container" id="image-container"></div>
+
+        <!-- word(s) to guess will appear here -->
         <h2 id="guess-the-letters"></h2>
 
+        <!-- user status container -->
         <div class="container" id="status-container">
+
+            <!-- win counter -->
             <p>Wins: <span id="win-count"></span></p>
+
+            <!-- guesses left counter -->
             <p>Guesses Left: <span id="guess-left"></span></p>
-            <p>Letters Pressed: <span id="pressed-letters"></span></p>
+
+            <!-- list of wrong pressed letter -->
+            <p>Letters Pressed: <span id="typed-letters"></span></p>
+
+            <!-- alert boxes -->
             <div id="green-box" class="alert alert-success" role="alert"></div>
             <div id="red-box" class="alert alert-danger" role="alert"></div>
         </div>
