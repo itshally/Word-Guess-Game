@@ -44,20 +44,18 @@ var newCountry = generateWord();
 //a function that starts the game but...
 function start(){
     //once the game starts, the words will be replaced with underscores
-    for(let x = 0; x < newCountry.length; x++){
+    for(var x = 0; x < newCountry.length; x++){
         
-
         if(newCountry[x] == " "){ 
             rightLetters[x] = '-';
         }else{
             rightLetters[x] = " _ ";
         }
     }
-    guessWordContainer.innerHTML = rightLetters.join(' ').toString().replace("-", '&nbsp;');
+    guessWordContainer.innerHTML = rightLetters.join(' ').replace("-", ' ').toString();
 }
 
-console.log(newCountry);
-start();
+
 //a function that restarts the game
 function restartUserStat(){
     guessesLeft = 10;
@@ -65,6 +63,8 @@ function restartUserStat(){
     guessCounter.textContent = Number(guessesLeft);
 }
 
+
+start();
 document.onkeypress = function(e){
 //hides the alert box when any key is pressed when the game restarts
 $('#green-box').hide();
@@ -83,24 +83,21 @@ $('#red-box').hide();
             if(keyPressed == newCountry[i]){
                 rightLetters[i] = keyPressed;
                 var checkLetters = rightLetters[i];
-                guessWordContainer.innerHTML = rightLetters.join(' ').replace('-', "&nbsp;");
-                console.log(checkLetters);
+                guessWordContainer.innerHTML = rightLetters.join(' ').replace('-', " ");
             }
         }   
 
         //if the letters matched the missing ones
         if(checkLetters == keyPressed){
             //NOTE: every matched letter will not lose a guess counter
-
-            if(newCountry == rightLetters.join("").toString()){
-
+            if(newCountry == rightLetters.join('').replace('-', " ")){
+                
                 //an alert-success box will appear with a string that shows achievement
                 $('#green-box').show();
                 greenAlert.textContent = "You got it!";
-                winPoint+=1;
+                winPoint++;
                 winCounter.textContent = Number(winPoint);
                 newCountry = generateWord();
-                console.log(newCountry);
                 start();
                 restartUserStat();
             }
@@ -109,7 +106,6 @@ $('#red-box').hide();
 
             //user can see the wrong letters
             if(typedLetters.innerHTML.match(keyPressed)){
-                console.log("already pressed")
                 $('#red-box').show();
                 redAlert.textContent = "You already pressed it.";
             }else{
@@ -125,13 +121,14 @@ $('#red-box').hide();
                 //an alert-danger box will appear with a string that shows the correct letter
                 $('#red-box').show();
                 redAlert.textContent = "You lost!";
-            
+                newCountry = generateWord();
+                start();
+                restartUserStat();
             }
         }
 
 //alert box will appear when the user pressed an invalid key
     }else{
-        console.log("Not a letter");
          //an alert-danger box will appear with a string
          $('#red-box').show();
          redAlert.textContent = "Letters Only";
