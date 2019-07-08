@@ -17,8 +17,7 @@ var countries = [
     
     //default values
     winPoint = 0,
-    guessesLeft = 10,
-    lettersPressed = rightLetters;
+    guessesLeft = 10;
 
     //counter labels with its default values
     winCounter.textContent = Number(winPoint);
@@ -32,17 +31,17 @@ $('#red-box').hide();
 
 //a function that generates a word from the countries array
 function generateWord(){
-
     var index = Math.floor(Math.random() * countries.length);
-    var countryName = countries[index].name;
-    document.getElementById('image-container').innerHTML = "<img src=\"" + countries[index].flag + "\">";
-    // console.log(index);
-    return countryName;
     
+    //generates through the flag image
+    document.getElementById('image-container').innerHTML = "<img src=\"" + countries[index].flag + "\">";
+
+    return countries[index].name;
 }    
+
 var newCountry = generateWord();
 
-//a function that starts the game
+//a function that starts the game but...
 function start(){
     //once the game starts, the words will be replaced with underscores
     for(let x = 0; x < newCountry.length; x++){
@@ -53,19 +52,17 @@ function start(){
         }
     }
     guessWordContainer.innerHTML = rightLetters.join(' ').toString().replace("-", '&nbsp;');
-    // restart();
 }
 
-var missingLetters = start();
+start();
 
 //a function that restarts the game
-function restart(){
+function restartUserStat(){
     guessesLeft = 10;
     typedLetters.innerHTML = "";
     guessCounter.textContent = Number(guessesLeft);
-    // newWord = generateWord();
-    // return newWord;
 }
+
 
 document.onkeypress = function(e){
 //hides the alert box when any key is pressed when the game restarts
@@ -86,29 +83,25 @@ $('#red-box').hide();
                 rightLetters[i] = keyPressed;
                 var checkLetters = rightLetters[i];
                 guessWordContainer.innerHTML = rightLetters.join(' ').replace('-', "&nbsp;");
-                // console.log('counter deactivate')
             }
         }   
-        
-
 
         //if the letters matched the missing ones
         if(checkLetters == keyPressed){
             //NOTE: every matched letter will not lose a guess counter
-            console.log('matched');
 
             if(newCountry == rightLetters.join("").toString()){
-                console.log("WIN!");
 
                 //an alert-success box will appear with a string that shows achievement
                 $('#green-box').show();
                 greenAlert.textContent = "You got it!";
                 winPoint+=1;
                 winCounter.textContent = Number(winPoint);
+                
             }
 
         }else{
-            console.log("not matched");
+
             //user can see the wrong letters
             if(typedLetters.innerHTML.match(keyPressed)){
                 console.log("already pressed")
@@ -121,23 +114,15 @@ $('#red-box').hide();
                 typedLetters.innerHTML += e.key.toLowerCase()  + ", ";
             }
             
-            
             //if the user has no more guesses left
             if(guessesLeft == 0){
-                console.log("You lose!")
-                // generateWord();
-                // start();
-                // restart();
-            //     //an alert-danger box will appear with a string that shows the correct letter
-            //     $('#red-box').show();
-            //     redAlert.textContent = "You lost!";
-            //     newGame();
+
+                //an alert-danger box will appear with a string that shows the correct letter
+                $('#red-box').show();
+                redAlert.textContent = "You lost!";
+            
             }
         }
-
-
-
-
 
 //alert box will appear when the user pressed an invalid key
     }else{
