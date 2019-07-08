@@ -45,24 +45,25 @@ var newCountry = generateWord();
 function start(){
     //once the game starts, the words will be replaced with underscores
     for(let x = 0; x < newCountry.length; x++){
-        rightLetters[x] = " _ ";
+        
 
         if(newCountry[x] == " "){ 
             rightLetters[x] = '-';
+        }else{
+            rightLetters[x] = " _ ";
         }
     }
     guessWordContainer.innerHTML = rightLetters.join(' ').toString().replace("-", '&nbsp;');
 }
 
+console.log(newCountry);
 start();
-
 //a function that restarts the game
 function restartUserStat(){
     guessesLeft = 10;
     typedLetters.innerHTML = "";
     guessCounter.textContent = Number(guessesLeft);
 }
-
 
 document.onkeypress = function(e){
 //hides the alert box when any key is pressed when the game restarts
@@ -83,6 +84,7 @@ $('#red-box').hide();
                 rightLetters[i] = keyPressed;
                 var checkLetters = rightLetters[i];
                 guessWordContainer.innerHTML = rightLetters.join(' ').replace('-', "&nbsp;");
+                console.log(checkLetters);
             }
         }   
 
@@ -97,7 +99,10 @@ $('#red-box').hide();
                 greenAlert.textContent = "You got it!";
                 winPoint+=1;
                 winCounter.textContent = Number(winPoint);
-                
+                newCountry = generateWord();
+                console.log(newCountry);
+                start();
+                restartUserStat();
             }
 
         }else{
